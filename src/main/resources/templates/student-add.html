@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student list</title>
+    <style>
+        td{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<ul>
+    <li>
+        <a th:href="@{/student}">Lista</a>
+    </li>
+    <li>
+        <a th:href="@{/student/add}">Dodaj</a>
+    </li>
+</ul>
+
+<!-- @{/student/add} Adres metody addStudent -->
+<form th:action="@{/student/add}" method="post" th:object="${nowy_student}">
+    <input type="number" hidden th:field="*{id}">
+    <input type="text" th:field="*{firstName}">
+    <input type="text" th:field="*{lastName}">
+    <input type="date" th:field="*{dateOfBirth}">
+    <input type="submit">
+</form>
+
+</body>
+</html>

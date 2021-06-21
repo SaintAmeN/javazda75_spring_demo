@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student details</title>
+    <style>
+        td{
+            border: 1px solid red;
+        }
+
+        .grades td{
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>
+        <a th:href="@{/student}">Lista</a>
+    </li>
+    <li>
+        <a th:href="@{/student/add}">Dodaj</a>
+    </li>
+</ul>
+
+<table>
+<tr th:object="${szczegoly_studenta}">
+    <td th:text="*{firstName}"></td>
+    <td th:text="*{lastName}"></td>
+    <td th:text="*{dateOfBirth}"></td>
+</tr>
+</table>
+<hr>
+<ul>
+    <li>
+        <a th:href="@{/grade/add(student_to_whom_we_want_to_add_grade=${szczegoly_studenta.id})}">Dodaj ocene</a>
+    </li>
+</ul>
+
+<table class="grades">
+<tr th:each="ocena,index : ${szczegoly_studenta.gradeList}">
+    <td th:text="${index.index+1}"></td>
+    <td th:text="${ocena.gradeValue}"></td>
+    <td th:text="${ocena.gradeSubject}"></td>
+    <td th:text="${ocena.localDateTimeAdded}"></td>
+    <td>
+        <a th:href="@{/grade/edit(gradeId=${ocena.id})}">Edytuj</a>
+    </td>
+    <td>
+        <a th:href="@{/grade/remove(gradeId=${ocena.id}, studentId=${szczegoly_studenta.id})}">Usun</a>
+    </td>
+</tr>
+</table>
+
+
+</body>
+</html>

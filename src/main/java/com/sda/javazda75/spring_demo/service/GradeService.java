@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +34,12 @@ public class GradeService {
             Student student = studentOptional.get();
 
             // powiązaliśmy studenta z Grade
-            grade.setStudent(student);
+            grade.setPoleStudent(student);
             gradeRepository.save(grade);
+
+            // nie daj boże zebym musial tak robic
+//            student.getGradeList().add(grade);
+//            studentRepository.save(student);
         }
         log.error("Nie udało się dodać oceny.");
     }

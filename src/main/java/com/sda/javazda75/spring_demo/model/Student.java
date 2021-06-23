@@ -30,6 +30,6 @@ public class Student {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "poleStudent", fetch = FetchType.EAGER)
     private List<Grade> gradeList;
 }

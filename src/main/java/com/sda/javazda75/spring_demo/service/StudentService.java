@@ -1,6 +1,8 @@
 package com.sda.javazda75.spring_demo.service;
 
 import com.sda.javazda75.spring_demo.model.Student;
+import com.sda.javazda75.spring_demo.model.dto.StudentDto;
+import com.sda.javazda75.spring_demo.model.mapper.StudentMapper;
 import com.sda.javazda75.spring_demo.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,12 +11,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
+    private final StudentMapper studentMapper;
 
     public void addStudent(Student student) {
         if (!isValid(student)) {
@@ -27,6 +31,13 @@ public class StudentService {
 
     public List<Student> getAll(){
         return studentRepository.findAll();
+    }
+
+    public List<StudentDto> getAllStudentInfo(){
+        return studentRepository.findAll()
+                .stream()
+                .map(studentMapper::getDtoFromStudent)
+                .collect(Collectors.toList());
     }
 
     private boolean isValid(Student student) {

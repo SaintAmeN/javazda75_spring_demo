@@ -30,5 +30,5 @@ public class Grade {
     @ManyToOne()
     @ToString.Exclude
     @JsonBackReference
-    private Student student;
+    private Student poleStudent;
 }

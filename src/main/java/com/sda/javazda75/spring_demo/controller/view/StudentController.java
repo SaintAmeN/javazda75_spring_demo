@@ -1,4 +1,4 @@
-package com.sda.javazda75.spring_demo.controller;
+package com.sda.javazda75.spring_demo.controller.view;
 
 import com.sda.javazda75.spring_demo.model.Student;
 import com.sda.javazda75.spring_demo.service.StudentService;

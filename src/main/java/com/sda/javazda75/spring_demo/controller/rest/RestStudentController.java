@@ -79,4 +79,33 @@ public class RestStudentController {
         }
     }
 
+    // usuwanie
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseMessage> removeStudent(@PathVariable Long id) {
+        boolean result = studentService.removeStudentWithId(id);
+        if(result){
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    // GET - pobieramy
+    // POST - wstawiamy
+    // PUT - zastępujemy
+    // PATCH - aktualizujemy (części)
+    // DELETE - usuwanie
+    @PatchMapping("/{id}")
+    public ResponseEntity<ResponseMessage<StudentDto>> updateStudent(@PathVariable Long id,
+                                                                     @RequestBody StudentDto studentDto) {
+        Optional<StudentDto> resultOpt = studentService.update(id, studentDto);
+        if(resultOpt.isPresent()){
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseMessage<>(resultOpt.get(), "Student updated!"));
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ResponseMessage<>(null, "Student does not exist!"));
+        }
+    }
+
 }

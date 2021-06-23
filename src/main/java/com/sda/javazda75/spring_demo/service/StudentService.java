@@ -64,4 +64,24 @@ public class StudentService {
     public Optional<Student> getStudentWithId(Long id) {
         return studentRepository.findById(id);
     }
+
+    public boolean removeStudentWithId(Long id) {
+        Optional<Student> studentOptional = getStudentWithId(id);
+        if(studentOptional.isPresent()){
+            removeStudentWithId(id);
+            return true;
+        }
+        return false;
+    }
+
+    public Optional<StudentDto> update(Long id, StudentDto studentDto) {
+        Optional<Student> studentOptional = getStudentWithId(id);
+        if(studentOptional.isPresent()){
+            Student student = studentOptional.get();
+
+            studentMapper.update(studentDto, student);
+            return Optional.of(studentMapper.getDtoFromStudent(studentRepository.save(student)));
+        }
+        return Optional.empty();
+    }
 }

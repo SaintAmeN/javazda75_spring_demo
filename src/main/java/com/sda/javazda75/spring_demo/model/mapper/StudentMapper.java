@@ -2,9 +2,7 @@ package com.sda.javazda75.spring_demo.model.mapper;
 
 import com.sda.javazda75.spring_demo.model.Student;
 import com.sda.javazda75.spring_demo.model.dto.StudentDto;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface StudentMapper {
@@ -22,4 +20,8 @@ public interface StudentMapper {
             @Mapping(source = "birthDate", target = "dateOfBirth")
     })
     Student getStudentFromDto(StudentDto studentDto);
+
+    // aktualizacja rekordu
+    @InheritInverseConfiguration(name = "getDtoFromStudent")
+    void update(StudentDto dto, @MappingTarget Student entity);
 }

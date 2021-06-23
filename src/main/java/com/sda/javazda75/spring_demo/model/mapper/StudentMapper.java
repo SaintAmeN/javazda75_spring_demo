@@ -15,4 +15,11 @@ public interface StudentMapper {
             @Mapping(target = "birthDate", source = "dateOfBirth")
     })
     StudentDto getDtoFromStudent(Student student);
+
+    @Mappings(value = {
+            @Mapping(source = "name", target = "firstName"),
+            @Mapping(source = "surname", target = "lastName"),
+            @Mapping(source = "birthDate", target = "dateOfBirth")
+    })
+    Student getStudentFromDto(StudentDto studentDto);
 }

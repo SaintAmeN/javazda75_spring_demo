@@ -29,6 +29,17 @@ public class StudentService {
         studentRepository.save(student);
     }
 
+    public boolean addStudent(StudentDto studentDto) {
+        Student student = studentMapper.getStudentFromDto(studentDto);
+        if (!isValid(student)) {
+            return false;
+        }
+
+        // jeśli poprawny, dodaj do bazy
+        studentRepository.save(student);
+        return true;
+    }
+
     public List<Student> getAll(){
         return studentRepository.findAll();
     }
